@@ -15,7 +15,7 @@
     /* Header */
     header {
       text-align: center;
-      padding: 50px 20px;
+      padding: 50px 20px 20px 20px;
       background: linear-gradient(to right, #ff6a00, #ee0979);
       color: white;
       border-radius: 0 0 20px 20px;
@@ -24,7 +24,22 @@
     }
     header h1 { font-size: 3em; margin-bottom: 0.3em; text-shadow: 2px 2px 6px rgba(0,0,0,0.35); }
     header h2 { font-weight: 400; font-size: 1.8em; text-shadow: 1px 1px 4px rgba(0,0,0,0.25); }
-    marquee { margin-top: 15px; }
+    marquee { margin-top: 15px; font-weight: bold; font-size: 1.1em; color: #fff; }
+
+    /* Discount banner */
+    #discountBanner {
+      background: #ff4444;
+      color: white;
+      font-weight: 700;
+      font-size: 1.3em;
+      padding: 10px 0;
+      margin: 0 auto 30px;
+      max-width: 960px;
+      border-radius: 10px;
+      text-align: center;
+      user-select: none;
+      box-shadow: 0 0 12px rgba(255, 68, 68, 0.7);
+    }
 
     .container { max-width: 960px; margin: 0 auto 40px; padding: 0 15px; }
 
@@ -72,10 +87,20 @@
     /* Cart section */
     .cart-section { background: #fff8fa; border: 2px solid #ee0979; }
     .cart-section h3 { color: #ee0979; margin-bottom: 15px; }
-    #cartItems div { padding: 10px 0; border-bottom: 1px solid #eee; }
+    #cartItems div {
+      padding: 10px 0; border-bottom: 1px solid #eee;
+      display: flex; justify-content: space-between; align-items: center;
+    }
     .cart-remove-btn {
       background: #dc2743; color: white; border: none;
       padding: 5px 10px; margin-left: 15px; border-radius: 5px; cursor: pointer;
+    }
+    .item-price {
+      font-weight: 700;
+      color: #ee0979;
+      margin-left: 15px;
+      min-width: 90px;
+      text-align: right;
     }
 
     /* Payment QR */
@@ -113,462 +138,512 @@
     }
     .live-ratings h3 { color: #ee0979; margin-bottom: 10px; }
     .live-ratings span { font-weight: 700; font-size: 1.3em; margin-right: 15px; }
-    .recent-ratings { margin-top: 15px; max-height: 180px; overflow-y: auto; padding-left: 10px; border-left: 4px solid #ee0979; font-style: italic; color: #aa0044; }
-    .purchase-history::-webkit-scrollbar,
-    .admin-orders::-webkit-scrollbar,
-    .recent-ratings::-webkit-scrollbar { width: 8px; }
-    .purchase-history::-webkit-scrollbar-thumb,
-    .admin-orders::-webkit-scrollbar-thumb,
-    .recent-ratings::-webkit-scrollbar-thumb { background-color: #ee0979; border-radius: 10px; }
-
-    /* Floating Chat Buttons */
-    .chat-btn {
-      position: fixed; bottom: 20px; background: #25D366;
-      color: white; padding: 12px; border-radius: 50%;
-      font-size: 22px; text-decoration: none;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      display: inline-flex; align-items: center; justify-content: center;
+    .recent-ratings { margin-top: 15px; max-height: 180px; overflow-y: auto; }
+    .recent-ratings div {
+      background: #fff; margin-bottom: 10px; padding: 10px; border-radius: 12px;
+      box-shadow: 0 0 8px rgba(204, 35, 102, 0.1);
     }
-    .telegram-btn { bottom: 80px; background: #0088cc; }
-     #topDiscountBanner {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      background: linear-gradient(90deg, #cc2366, #e1306c, #fd1d1d);
-      color: #fff;
-      text-align: center;
-      font-weight: bold;
-      font-size: 1.1em;
-      padding: 12px 0;
-      z-index: 10000;
-      animation: bannerSlide 0.5s ease-in-out;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
+    .recent-ratings div:last-child { margin-bottom: 0; }
 
-    @keyframes bannerSlide {
-      from {
-        transform: translateY(-100%);
-      }
-      to {
-        transform: translateY(0);
-      }
+    /* Responsive */
+    @media (max-width: 650px) {
+      header h1 { font-size: 2.2em; }
+      header h2 { font-size: 1.4em; }
+      #discountBanner { font-size: 1.1em; }
+      form, .cart-section, #userPanel, #adminPanel { padding: 20px; }
     }
-
-    /* 💥 Bouncy Side Discount Badge */
-    #sideDiscountBadge {
-      position: fixed;
-      right: -40px;
-      top: 45%;
-      background: #cc2366;
-      color: #fff;
-      font-size: 1.2em;
-      font-weight: bold;
-      transform: rotate(90deg);
-      padding: 10px 25px;
-      border-radius: 10px 10px 0 0;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-      z-index: 9999;
-      animation: pulseBadge 1.8s infinite;
-      cursor: pointer;
-    }
-
-    @keyframes pulseBadge {
-      0% {
-        transform: rotate(90deg) scale(1);
-      }
-      50% {
-        transform: rotate(90deg) scale(1.1);
-      }
-      100% {
-        transform: rotate(90deg) scale(1);
-      }
-    }
-
-    #sideDiscountBadge:hover {
-      background: #a71f57;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- 🔝 Top Sticky Promo Banner -->
-  <div id="topDiscountBanner">
-    🎉 Limited Time Offer: <strong>50% OFF</strong> on Every Item — Shop Now!
+<header>
+  <h1>Instagram_tf</h1>
+  <h2>Likes, Followers, Views, Comments</h2>
+  <marquee behavior="scroll" direction="left" scrollamount="10" style="font-weight:700; color:#ffe6f0;">Welcome to Instagram_tf — Get instant boosts on your Instagram!</marquee>
+</header>
+
+<div id="discountBanner">🎉 EVERY ITEM 50% OFF! 🎉</div>
+
+<div class="container">
+
+  <!-- Login Section -->
+  <div class="login-section" id="loginSection">
+    <h3>Login (Enter your username)</h3>
+    <input type="text" id="usernameInput" placeholder="Username" autocomplete="off" />
+    <button id="loginBtn">Login</button>
   </div>
 
-  <!-- 💥 Side Discount Badge -->
-  <div id="sideDiscountBadge">50% OFF</div>
+  <!-- Purchase count -->
+  <div class="purchase-count" id="purchaseCount">Total Purchases Today: 0</div>
 
-  <!-- 🔻 Your Main Page Content -->
-  <header>
-    <h1>CHEAP AND BEST SELLING ON INSTAGRAM</h1>
-    <h2>LIKES AND VIEWS AND FOLLOWERS</h2>
-    <marquee behavior="scroll" direction="left" scrollamount="7">
-      🚀 EVERY PURCHASE CASH BACK ₹20 | 🔧 UPCOMING UPDATE: VERSION 2.0 | 📱 TELEGRAM LIKES AND FOLLOWERS BOOST COMING SOON!
-    </marquee>
-  </header>
- <div class="container">
-    <!-- Your existing login sections, purchase forms, user/admin panels go here -->
-    
-    <!-- Example Purchase Form Target -->
-    <form id="purchaseForm">
-      <!-- Existing form inputs here -->
-      <label for="instaProfile">Instagram Profile</label>
-      <input type="text" id="instaProfile" placeholder="Must be public profile username" required />
-      <button type="submit">Submit Purchase</button>
-    </form>
-<div class="container">
-  <div class="purchase-count" id="purchaseCount">Total Purchases: 0</div>
+  <!-- Purchase Form -->
+  <form id="purchaseForm" style="display:none;">
+    <label for="optionSelect">Choose Service:</label>
+    <select id="optionSelect" required>
+      <option value="" disabled selected>Select an option</option>
+      <option value="likes-1k" data-price="100" data-label="1K LIKES - 100 RS">1K LIKES - 100 RS</option>
+      <option value="likes-5k" data-price="400" data-label="5K LIKES - 400 RS">5K LIKES - 400 RS</option>
+      <option value="followers-1k" data-price="250" data-label="1K FOLLOWERS - 250 RS">1K FOLLOWERS - 250 RS</option>
+      <option value="followers-5k" data-price="950" data-label="5K FOLLOWERS - 950 RS">5K FOLLOWERS - 950 RS</option>
+      <option value="views-1k" data-price="80" data-label="1K VIEWS - 80 RS">1K VIEWS - 80 RS</option>
+      <option value="comments-100" data-price="180" data-label="100 COMMENTS - 180 RS">100 COMMENTS - 180 RS</option>
+    </select>
 
-  <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="chat-btn whatsapp-btn">💬</a>
-  <a href="https://t.me/YOUR_TELEGRAM" target="_blank" class="chat-btn telegram-btn">📨</a>
+    <label for="instaProfile">Instagram Profile (required):</label>
+    <input type="text" id="instaProfile" placeholder="@yourprofile" required autocomplete="off" />
 
-  <!-- LOGIN SECTIONS -->
-  <section class="login-section" id="userLoginSection">
-    <h3>User Login</h3>
-    <form id="userLoginForm">
-      <input type="text" id="userLoginName" placeholder="Username (e.g., TF1000)" required />
-      <input type="password" id="userLoginPass" placeholder="Password (same as username)" required />
-      <button type="submit">Login</button>
-    </form>
+    <label for="postLink">Post Link (optional):</label>
+    <input type="text" id="postLink" placeholder="https://www.instagram.com/p/..." />
+
+    <label for="mailId">Email (optional):</label>
+    <input type="email" id="mailId" placeholder="email@example.com" />
+
+    <label for="paymentUtr">Payment UTR / Transaction ID (required):</label>
+    <input type="text" id="paymentUtr" placeholder="Payment UTR" required autocomplete="off" />
+
+    <button type="submit" id="addToCartBtn">Add to Cart</button>
+  </form>
+
+  <!-- Cart Section -->
+  <section class="cart-section" id="cartSection" style="display:none;">
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <div style="margin-top: 15px; font-weight:700; font-size:1.2em; text-align:right;" id="cartTotal">Total: ₹0.00</div>
+    <button id="purchaseBtn" disabled>Purchase Now</button>
   </section>
 
-  <section class="login-section" id="adminLoginSection">
-    <h3>Admin Login</h3>
-    <form id="adminLoginForm">
-      <input type="text" id="adminLoginName" placeholder="Admin Username" required />
-      <input type="password" id="adminLoginPass" placeholder="Admin Password" required />
-      <button type="submit">Login</button>
-    </form>
+  <!-- Payment Details & QR -->
+  <section class="payment-section" id="paymentSection" style="display:none;">
+    <p>Send your payment to this QR code (UPI: 1234567890@upi)</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=1234567890@upi&pn=Instagram_tf&am=0&cu=INR" alt="Payment QR" />
+    <small>Please upload payment proof with UTR/Transaction ID above.</small>
   </section>
 
-  <!-- USER PANEL -->
+  <!-- User Purchase History -->
   <section id="userPanel" style="display:none;">
-    <h2>Welcome, <span id="userDisplayName"></span></h2>
-
-    <!-- CART -->
-    <section class="cart-section">
-      <h3>🛒 Your Cart</h3>
-      <div id="cartItems">Cart is empty.</div>
-      <button id="submitCartBtn" style="margin-top:10px;display:none;">Submit Cart Purchase</button>
-    </section>
-
-    <!-- PURCHASE FORM -->
-    <form id="purchaseForm">
-      <label for="optionSelect">Select Option</label>
-      <select id="optionSelect" required>
-        <optgroup label="LIKES">
-          <option value="likes-1k" data-price="100" data-label="1K LIKES - 100 RS">1K LIKES - 100 RS</option>
-          <option value="likes-2k" data-price="150" data-label="2K LIKES - 150 RS">2K LIKES - 150 RS</option>
-          <option value="likes-5k" data-price="250" data-label="5K LIKES - 250 RS">5K LIKES - 250 RS</option>
-          <option value="likes-10k" data-price="500" data-label="10K LIKES - 500 RS">10K LIKES - 500 RS</option>
-        </optgroup>
-        <optgroup label="VIEWS">
-          <option value="views-1k" data-price="200" data-label="1K VIEWS - 200 RS">1K VIEWS - 200 RS</option>
-          <option value="views-2k" data-price="250" data-label="2K VIEWS - 250 RS">2K VIEWS - 250 RS</option>
-          <option value="views-5k" data-price="550" data-label="5K VIEWS - 550 RS">5K VIEWS - 550 RS</option>
-          <option value="views-10k" data-price="1000" data-label="10K VIEWS - 1000 RS">10K VIEWS - 1000 RS</option>
-        </optgroup>
-        <optgroup label="FOLLOWERS">
-          <option value="followers-1k" data-price="500" data-label="1K FOLLOWERS - 500 RS">1K FOLLOWERS - 500 RS</option>
-          <option value="followers-2k" data-price="1000" data-label="2K FOLLOWERS - 1000 RS">2K FOLLOWERS - 1000 RS</option>
-          <option value="followers-5k" data-price="2500" data-label="5K FOLLOWERS - 2500 RS">5K FOLLOWERS - 2500 RS</option>
-          <option value="followers-10k" data-price="5500" data-label="10K FOLLOWERS - 5500 RS">10K FOLLOWERS - 5500 RS</option>
-        </optgroup>
-      </select>
-
-      <label for="instaProfile">Instagram Profile <span style="color:#ee0979;">*</span></label>
-      <input type="text" id="instaProfile" placeholder="Public profile username" required />
-
-      <label for="postLink">Instagram Post Link / Reels URL</label>
-      <input type="text" id="postLink" placeholder="Post or reels URL (optional)" />
-
-      <label for="mailId">Email ID</label>
-      <input type="email" id="mailId" placeholder="Enter your valid email" required />
-
-      <label for="paymentUtr">Payment UTR Number</label>
-      <input type="text" id="paymentUtr" placeholder="Enter payment UTR number" required />
-
-      <button type="submit">Add to Cart</button>
-    </form>
-
-    <!-- PAYMENT QR -->
-    <div class="payment-section">
-      <p>Payment Method:</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=6304431702@upi" alt="Payment QR Code"/>
-      <small>Scan this QR code to pay</small>
-    </div>
-
-    <!-- PURCHASE HISTORY -->
-    <section class="purchase-history" id="purchaseHistory">
-      <h3>Your Purchases</h3>
-      <div id="userPurchaseList">No purchases yet.</div>
-    </section>
-
-    <!-- RATING SECTION -->
-    <section id="ratingSection">
-      <h3>Rate Your Order</h3>
-      <label for="ratingStars">Rating (1‑5)</label>
-      <select id="ratingStars">
-        <option value="">Select Rating</option>
-        <option value="1">⭐ 1 Star</option>
-        <option value="2">⭐⭐ 2 Stars</option>
-        <option value="3">⭐⭐⭐ 3 Stars</option>
-        <option value="4">⭐⭐⭐⭐ 4 Stars</option>
-        <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
-      </select>
-      <label for="ratingComments">Comments (optional)</label>
-      <textarea id="ratingComments" placeholder="Write your review..."></textarea>
-      <button id="submitRatingBtn">Submit Rating</button>
-      <button id="cancelRatingBtn" style="background:#aaa;">Cancel</button>
-    </section>
-
-    <button class="logout-btn" id="userLogoutBtn">Logout</button>
-
-    <!-- LIVE RATINGS DISPLAY -->
-    <div class="live-ratings" aria-live="polite" aria-atomic="true">
-      <h3>Live Ratings</h3>
-      <span>Average Rating: <strong id="avgRating">N/A</strong></span>
-      <span>Total Ratings: <strong id="totalRatings">0</strong></span>
-      <div class="recent-ratings" id="recentRatings">No ratings yet.</div>
-    </div>
+    <h2>Your Orders</h2>
+    <div id="userPurchaseList">No orders yet.</div>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
   </section>
 
-  <!-- ADMIN PANEL -->
+  <!-- Admin Panel -->
   <section id="adminPanel" style="display:none;">
-    <h2>Admin Panel</h2>
-    <div class="admin-orders">
-      <h3>Pending Orders</h3>
-      <div id="ordersContainer">No pending orders.</div>
-    </div>
-    <button class="logout-btn" id="adminLogoutBtn">Logout</button>
+    <h2>Admin Orders Panel</h2>
+    <div id="adminOrdersList">No orders yet.</div>
+    <button class="logout-btn" id="adminLogoutBtn">Logout Admin</button>
+  </section>
+
+  <!-- Rating Section -->
+  <section id="ratingSection">
+    <h3>Rate Your Order</h3>
+    <label for="ratingInput">Rating (1-5):</label>
+    <select id="ratingInput">
+      <option value="" selected disabled>Select rating</option>
+      <option value="1">1 - Very Bad</option>
+      <option value="2">2 - Bad</option>
+      <option value="3">3 - Okay</option>
+      <option value="4">4 - Good</option>
+      <option value="5">5 - Excellent</option>
+    </select>
+    <label for="ratingComment">Comments (optional):</label>
+    <textarea id="ratingComment" placeholder="Write your feedback here..."></textarea>
+    <button id="submitRatingBtn">Submit Rating</button>
+  </section>
+
+  <!-- Live Ratings -->
+  <section class="live-ratings" id="liveRatingsSection" style="display:none;">
+    <h3>Live User Ratings</h3>
+    <span id="avgRating">Average: 0</span>
+    <span id="totalRatings">Total Ratings: 0</span>
+    <div class="recent-ratings" id="recentRatings"></div>
   </section>
 
 </div>
 
 <script>
-// --- Constants & State ---
-const ADMIN_USERNAME = "6304431702", ADMIN_PASSWORD = "5454";
-let currentUser = null;
-let orders = JSON.parse(localStorage.getItem('orders')) || [];
-let ratings = JSON.parse(localStorage.getItem('ratings')) || [];
-let cart = [];
+(() => {
+  'use strict';
 
-// --- DOM References ---
-const userLoginSection = document.getElementById('userLoginSection');
-const adminLoginSection = document.getElementById('adminLoginSection');
-const userPanel = document.getElementById('userPanel');
-const adminPanel = document.getElementById('adminPanel');
-const purchaseForm = document.getElementById('purchaseForm');
-const optionSelect = document.getElementById('optionSelect');
-const cartItemsEl = document.getElementById('cartItems');
-const submitCartBtn = document.getElementById('submitCartBtn');
-const purchaseCountEl = document.getElementById('purchaseCount');
-const userPurchaseList = document.getElementById('userPurchaseList');
-const adminOrdersList = document.getElementById('ordersContainer');
-const ratingSection = document.getElementById('ratingSection');
-const ratingStars = document.getElementById('ratingStars');
-const ratingComments = document.getElementById('ratingComments');
-const submitRatingBtn = document.getElementById('submitRatingBtn');
-const cancelRatingBtn = document.getElementById('cancelRatingBtn');
-const avgRatingEl = document.getElementById('avgRating');
-const totalRatingsEl = document.getElementById('totalRatings');
-const recentRatingsEl = document.getElementById('recentRatings');
-const userLogoutBtn = document.getElementById('userLogoutBtn');
-const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+  // Cache DOM elements
+  const loginSection = document.getElementById('loginSection');
+  const usernameInput = document.getElementById('usernameInput');
+  const loginBtn = document.getElementById('loginBtn');
 
-// --- LocalStorage Helpers ---
-function saveOrders() { localStorage.setItem('orders', JSON.stringify(orders)); }
-function saveRatings() { localStorage.setItem('ratings', JSON.stringify(ratings)); }
+  const purchaseForm = document.getElementById('purchaseForm');
+  const optionSelect = document.getElementById('optionSelect');
+  const instaProfileInput = document.getElementById('instaProfile');
+  const postLinkInput = document.getElementById('postLink');
+  const mailIdInput = document.getElementById('mailId');
+  const paymentUtrInput = document.getElementById('paymentUtr');
+  const addToCartBtn = document.getElementById('addToCartBtn');
 
-// --- UI Updates ---
-function updatePurchaseCount() { purchaseCountEl.textContent = `Total Purchases: ${orders.length}`; }
+  const cartSection = document.getElementById('cartSection');
+  const cartItems = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+  const purchaseBtn = document.getElementById('purchaseBtn');
 
-function updateCartDisplay() {
-  if (!cart.length) {
-    cartItemsEl.textContent = 'Cart is empty.';
-    submitCartBtn.style.display = 'none';
-    return;
-  }
-  cartItemsEl.innerHTML = cart.map((item,i)=> `
-    <div>${item.label}
-      <button class="cart-remove-btn" onclick="removeCartItem(${i})">Remove</button>
-    </div>`).join('');
-  submitCartBtn.style.display = 'inline-block';
-}
+  const paymentSection = document.getElementById('paymentSection');
 
-function renderUserPurchases() {
-  if (!currentUser) return;
-  const userOrders = orders.filter(o => o.username === currentUser);
-  if (!userOrders.length) {
-    userPurchaseList.textContent = 'No purchases yet.';
-    ratingSection.style.display = 'none';
-    return;
-  }
-  userPurchaseList.innerHTML = userOrders.map((order, idx) => `
-    <div>
-      <strong>Order #${idx+1}</strong> - ${order.selectedOptionLabel} -
-      Status: <span style="color:${order.status==='success'?'green':'orange'}">${order.status}</span><br>
-      Instagram: ${order.instaProfile}<br>
-      Link: ${order.postLink||'-'}<br>
-      Email: ${order.mailId}<br>
-      UTR: ${order.paymentUtr}
-    </div>`).join('');
-  const pendingRatingIndex = userOrders.findIndex(o => o.status==='success' && !o.rated);
-  if (pendingRatingIndex > -1) {
-    ratingSection.style.display = 'block';
-    ratingSection.dataset.orderIndex = orders.findIndex(o=>o.username===currentUser && o.status==='success' && !o.rated);
-  } else {
-    ratingSection.style.display = 'none';
-  }
-}
+  const userPanel = document.getElementById('userPanel');
+  const userPurchaseList = document.getElementById('userPurchaseList');
+  const logoutBtn = document.getElementById('logoutBtn');
 
-function renderAdminOrders() {
-  const pending = orders.filter(o=>o.status==='pending');
-  if (!pending.length) {
-    adminOrdersList.textContent = 'No pending orders.';
-    return;
-  }
-  adminOrdersList.innerHTML = pending.map((order, idx) => `
-    <div>
-      <strong>Order #${idx+1}</strong> - ${order.selectedOptionLabel}<br>
-      User: ${order.username}<br>
-      Instagram: ${order.instaProfile}<br>
-      Link: ${order.postLink||'-'}<br>
-      Email: ${order.mailId}<br>
-      UTR: ${order.paymentUtr}<br>
-      <button class="order-complete-btn" data-index="${orders.indexOf(order)}">Mark as Success</button>
-    </div>`).join('');
-  document.querySelectorAll('.order-complete-btn').forEach(btn => {
-    btn.onclick = () => {
-      const i = parseInt(btn.dataset.index,10);
-      if (confirm('Mark order as SUCCESS?')) {
-        orders[i].status = 'success';
-        saveOrders();
-        alert('Order marked success; user can now rate.');
-        renderAdminOrders();
-        if (currentUser) renderUserPurchases();
-        updatePurchaseCount();
+  const adminPanel = document.getElementById('adminPanel');
+  const adminOrdersList = document.getElementById('adminOrdersList');
+  const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+
+  const purchaseCountDisplay = document.getElementById('purchaseCount');
+
+  const ratingSection = document.getElementById('ratingSection');
+  const ratingInput = document.getElementById('ratingInput');
+  const ratingComment = document.getElementById('ratingComment');
+  const submitRatingBtn = document.getElementById('submitRatingBtn');
+
+  const liveRatingsSection = document.getElementById('liveRatingsSection');
+  const avgRatingDisplay = document.getElementById('avgRating');
+  const totalRatingsDisplay = document.getElementById('totalRatings');
+  const recentRatingsContainer = document.getElementById('recentRatings');
+
+  const discountPercent = 50;
+
+  // Data stores in localStorage keys
+  const LS_ORDERS_KEY = 'instagram_tf_orders_v2';
+  const LS_RATINGS_KEY = 'instagram_tf_ratings_v2';
+
+  let currentUser = null;
+  let cart = [];
+  let orders = JSON.parse(localStorage.getItem(LS_ORDERS_KEY)) || [];
+  let ratings = JSON.parse(localStorage.getItem(LS_RATINGS_KEY)) || [];
+
+  // Admin username for demo
+  const ADMIN_USERNAME = 'admin';
+
+  // 1. Apply discount 50% to options and update labels
+  function applyDiscountToOptions(discount) {
+    const options = optionSelect.querySelectorAll('option');
+    options.forEach(option => {
+      if (!option.value) return; // skip placeholder
+      const originalPrice = parseFloat(option.dataset.price);
+      if (!isNaN(originalPrice)) {
+        const discountedPrice = (originalPrice * (100 - discount)) / 100;
+        option.dataset.discountedPrice = discountedPrice.toFixed(2);
+        option.textContent = `${option.dataset.label} (50% OFF: ₹${discountedPrice.toFixed(2)})`;
       }
-    };
-  });
-}
-
-function updateLiveRatings() {
-  if (!ratings.length) {
-    avgRatingEl.textContent = 'N/A';
-    totalRatingsEl.textContent = '0';
-    recentRatingsEl.textContent = 'No ratings yet.';
-    return;
+    });
   }
-  const sum = ratings.reduce((a,r)=>a+r.rating,0);
-  const avg = (sum / ratings.length).toFixed(2);
-  avgRatingEl.textContent = `${avg} ⭐`;
-  totalRatingsEl.textContent = ratings.length;
-  recentRatingsEl.innerHTML = ratings.slice(-5).reverse().map(r=>`
-    <div>⭐ ${r.rating} - ${r.comment||'<i>No comment</i>'} <br>
-      <small><b>${r.username}</b></small>
-    </div>`).join('');
-}
 
-// --- Cart Logic ---
-optionSelect.addEventListener('change', ()=>{
-  const opt = optionSelect.selectedOptions[0];
-  cart.push({ value: opt.value, label: opt.dataset.label });
-  updateCartDisplay();
-});
-window.removeCartItem = function(i) { cart.splice(i,1); updateCartDisplay(); }
-submitCartBtn.onclick = () => {
-  const insta = document.getElementById('instaProfile').value.trim();
-  const mail = document.getElementById('mailId').value.trim();
-  const utr = document.getElementById('paymentUtr').value.trim();
-  if (!insta || !mail.includes('@') || !utr) return alert('Fill all required fields!');
-  cart.forEach(item => {
-    orders.push({
+  // 2. Update Cart Display with discounted prices
+  function updateCartDisplay() {
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<em>Your cart is empty.</em>';
+      purchaseBtn.disabled = true;
+      cartTotal.textContent = 'Total: ₹0.00';
+      return;
+    }
+
+    cart.forEach((item, idx) => {
+      total += item.price;
+      const itemDiv = document.createElement('div');
+      itemDiv.textContent = item.label;
+
+      const priceSpan = document.createElement('span');
+      priceSpan.className = 'item-price';
+      priceSpan.textContent = `₹${item.price.toFixed(2)}`;
+
+      // Remove button
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'cart-remove-btn';
+      removeBtn.textContent = 'Remove';
+      removeBtn.addEventListener('click', () => {
+        cart.splice(idx, 1);
+        updateCartDisplay();
+      });
+
+      itemDiv.appendChild(priceSpan);
+      itemDiv.appendChild(removeBtn);
+
+      cartItems.appendChild(itemDiv);
+    });
+
+    cartTotal.textContent = `Total: ₹${total.toFixed(2)}`;
+    purchaseBtn.disabled = false;
+  }
+
+  // 3. Update purchase count display (total orders)
+  function updatePurchaseCount() {
+    purchaseCountDisplay.textContent = `Total Purchases Today: ${orders.length}`;
+  }
+
+  // 4. Save orders to localStorage
+  function saveOrders() {
+    localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
+  }
+
+  // 5. Save ratings to localStorage
+  function saveRatings() {
+    localStorage.setItem(LS_RATINGS_KEY, JSON.stringify(ratings));
+  }
+
+  // 6. Show user orders
+  function showUserOrders() {
+    const userOrders = orders.filter(o => o.username === currentUser);
+    if (userOrders.length === 0) {
+      userPurchaseList.innerHTML = '<em>No orders yet.</em>';
+      return;
+    }
+    userPurchaseList.innerHTML = userOrders.map((order, idx) => `
+      <div>
+        <strong>Order #${idx + 1}</strong> — ${order.selectedOptionLabel} — ₹${order.price.toFixed(2)}<br/>
+        Status: <span style="color:${order.status === 'success' ? 'green' : 'orange'}">${order.status}</span><br/>
+        Instagram: ${order.instaProfile}<br/>
+        Post Link: ${order.postLink || '-'}<br/>
+        Email: ${order.mailId || '-'}<br/>
+        Payment UTR: ${order.paymentUtr}<br/>
+      </div>
+    `).join('');
+  }
+
+  // 7. Show admin orders with status toggle
+  function showAdminOrders() {
+    if (orders.length === 0) {
+      adminOrdersList.innerHTML = '<em>No orders yet.</em>';
+      return;
+    }
+
+    adminOrdersList.innerHTML = '';
+    orders.forEach((order, idx) => {
+      const orderDiv = document.createElement('div');
+
+      orderDiv.innerHTML = `
+        <strong>Order #${idx + 1}</strong> — User: ${order.username} — ${order.selectedOptionLabel} — ₹${order.price.toFixed(2)}<br/>
+        Status: <span style="color:${order.status === 'success' ? 'green' : 'orange'}">${order.status}</span><br/>
+        Instagram: ${order.instaProfile}<br/>
+        Post Link: ${order.postLink || '-'}<br/>
+        Email: ${order.mailId || '-'}<br/>
+        Payment UTR: ${order.paymentUtr}<br/>
+      `;
+
+      if (order.status !== 'success') {
+        const completeBtn = document.createElement('button');
+        completeBtn.className = 'order-complete-btn';
+        completeBtn.textContent = 'Mark as Completed';
+        completeBtn.addEventListener('click', () => {
+          orders[idx].status = 'success';
+          saveOrders();
+          showAdminOrders();
+          updatePurchaseCount();
+        });
+        orderDiv.appendChild(completeBtn);
+      }
+
+      adminOrdersList.appendChild(orderDiv);
+    });
+  }
+
+  // 8. Login process
+  loginBtn.addEventListener('click', () => {
+    const username = usernameInput.value.trim();
+    if (!username) {
+      alert('Please enter a username.');
+      return;
+    }
+    currentUser = username.toLowerCase();
+    usernameInput.value = '';
+
+    if (currentUser === ADMIN_USERNAME) {
+      // Show admin panel
+      loginSection.style.display = 'none';
+      purchaseForm.style.display = 'none';
+      cartSection.style.display = 'none';
+      paymentSection.style.display = 'none';
+      userPanel.style.display = 'none';
+      adminPanel.style.display = 'block';
+      showAdminOrders();
+      updatePurchaseCount();
+    } else {
+      // Show purchase form + user panel
+      loginSection.style.display = 'none';
+      purchaseForm.style.display = 'block';
+      cartSection.style.display = 'block';
+      paymentSection.style.display = 'block';
+      userPanel.style.display = 'block';
+      adminPanel.style.display = 'none';
+      showUserOrders();
+      updatePurchaseCount();
+    }
+  });
+
+  logoutBtn.addEventListener('click', () => {
+    location.reload();
+  });
+
+  adminLogoutBtn.addEventListener('click', () => {
+    location.reload();
+  });
+
+  // 9. Add to cart event
+  purchaseForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!currentUser || currentUser === ADMIN_USERNAME) {
+      alert('Please login as a user to add items to the cart.');
+      return;
+    }
+
+    const opt = optionSelect.selectedOptions[0];
+    if (!opt || !opt.value) {
+      alert('Please select a service option.');
+      return;
+    }
+
+    const insta = instaProfileInput.value.trim();
+    if (!insta) {
+      alert('Instagram profile is required.');
+      return;
+    }
+    const utr = paymentUtrInput.value.trim();
+    if (!utr) {
+      alert('Payment UTR / Transaction ID is required.');
+      return;
+    }
+
+    const discountedPrice = parseFloat(opt.dataset.discountedPrice) || parseFloat(opt.dataset.price);
+    const label = `${opt.dataset.label} (50% OFF: ₹${discountedPrice.toFixed(2)})`;
+
+    // Add item to cart
+    cart.push({
+      value: opt.value,
+      label: label,
+      price: discountedPrice,
+      instaProfile: insta,
+      postLink: postLinkInput.value.trim(),
+      mailId: mailIdInput.value.trim(),
+      paymentUtr: utr
+    });
+
+    updateCartDisplay();
+
+    // Clear inputs except cart-related (optional)
+    optionSelect.selectedIndex = 0;
+    instaProfileInput.value = '';
+    postLinkInput.value = '';
+    mailIdInput.value = '';
+    paymentUtrInput.value = '';
+  });
+
+  // 10. Purchase button event
+  purchaseBtn.addEventListener('click', () => {
+    if (cart.length === 0) {
+      alert('Your cart is empty.');
+      return;
+    }
+    if (!currentUser || currentUser === ADMIN_USERNAME) {
+      alert('Login as a user to place orders.');
+      return;
+    }
+
+    // Save all cart items as orders with pending status
+    cart.forEach(item => {
+      orders.push({
+        username: currentUser,
+        selectedOptionValue: item.value,
+        selectedOptionLabel: item.label,
+        price: item.price,
+        instaProfile: item.instaProfile,
+        postLink: item.postLink,
+        mailId: item.mailId,
+        paymentUtr: item.paymentUtr,
+        status: 'pending',
+        rated: false
+      });
+    });
+    saveOrders();
+    updatePurchaseCount();
+    showUserOrders();
+
+    // Clear cart
+    cart = [];
+    updateCartDisplay();
+
+    alert('Order placed successfully! Please wait for confirmation.');
+  });
+
+  // 11. Ratings section logic
+  function showRatings() {
+    if (ratings.length === 0) {
+      liveRatingsSection.style.display = 'none';
+      return;
+    }
+    liveRatingsSection.style.display = 'block';
+
+    const totalRatings = ratings.length;
+    const avgRating = (ratings.reduce((a, r) => a + r.rating, 0) / totalRatings).toFixed(2);
+
+    avgRatingDisplay.textContent = `Average: ${avgRating}`;
+    totalRatingsDisplay.textContent = `Total Ratings: ${totalRatings}`;
+
+    recentRatingsContainer.innerHTML = ratings.slice(-5).reverse().map(r => `
+      <div>
+        <strong>${r.username}</strong> — Rated: ${r.rating} ⭐<br/>
+        ${r.comment ? `<em>"${r.comment}"</em>` : ''}
+      </div>
+    `).join('');
+  }
+
+  showRatings();
+
+  // Submit rating button event
+  submitRatingBtn.addEventListener('click', () => {
+    if (!currentUser || currentUser === ADMIN_USERNAME) {
+      alert('Please login as a user to submit a rating.');
+      return;
+    }
+
+    const ratingValue = parseInt(ratingInput.value, 10);
+    if (!ratingValue || ratingValue < 1 || ratingValue > 5) {
+      alert('Please select a valid rating between 1 and 5.');
+      return;
+    }
+
+    const comment = ratingComment.value.trim();
+
+    // Check if user has any completed order to rate
+    const userCompletedOrders = orders.filter(o => o.username === currentUser && o.status === 'success' && !o.rated);
+    if (userCompletedOrders.length === 0) {
+      alert('You have no completed orders to rate.');
+      return;
+    }
+
+    // Mark the first unrated completed order as rated
+    const orderToMark = orders.find(o => o.username === currentUser && o.status === 'success' && !o.rated);
+    if (orderToMark) {
+      orderToMark.rated = true;
+      saveOrders();
+    }
+
+    ratings.push({
       username: currentUser,
-      selectedOptionValue: item.value,
-      selectedOptionLabel: item.label,
-      instaProfile: insta, postLink: document.getElementById('postLink').value.trim(),
-      mailId: mail, paymentUtr: utr, status: 'pending', rated: false
+      rating: ratingValue,
+      comment: comment,
+      timestamp: Date.now()
     });
+    saveRatings();
+
+    ratingInput.value = '';
+    ratingComment.value = '';
+    showRatings();
+
+    alert('Thank you for your feedback!');
   });
-  saveOrders(); cart=[]; updateCartDisplay();
-  alert('Cart submitted!'); renderUserPurchases(); updatePurchaseCount(); purchaseForm.reset();
-};
 
-// --- Purchase Form Submit ---
-purchaseForm.addEventListener('submit', e=>{
-  e.preventDefault();
-  optionSelect.dispatchEvent(new Event('change'));
-});
-
-// --- Rating Submit/Cancel ---
-submitRatingBtn.onclick = ()=>{
-  const idx = parseInt(ratingSection.dataset.orderIndex,10);
-  const r = parseInt(ratingStars.value,10);
-  const comment = ratingComments.value.trim();
-  if (!r || r<1 || r>5) return alert('Choose rating 1–5.');
-  orders[idx].rated = true;
-  saveOrders();
-  ratings.push({ username: currentUser, rating: r, comment, timestamp: new Date().toISOString() });
-  saveRatings();
-  alert('Thanks for rating!');
-  ratingComments.value = '';
-  ratingSection.style.display = 'none';
-  updateLiveRatings();
-  renderUserPurchases();
-};
-cancelRatingBtn.onclick = ()=>{ ratingComments.value=''; ratingSection.style.display='none'; }
-
-// --- Login / Logout ---
-document.getElementById('userLoginForm').addEventListener('submit', e=>{
-  e.preventDefault();
-  const u = document.getElementById('userLoginName').value.trim();
-  const p = document.getElementById('userLoginPass').value.trim();
-  if (!u.toUpperCase().startsWith('TF') || p !== u) return alert("Invalid user credentials.");
-  currentUser = u;
-  document.getElementById('userDisplayName').textContent = u;
-  userLoginSection.style.display='none';
-  adminLoginSection.style.display='none';
-  userPanel.style.display='block';
-  adminPanel.style.display='none';
-  renderUserPurchases();
+  // Initialize
+  applyDiscountToOptions(discountPercent);
   updatePurchaseCount();
-  updateLiveRatings();
-});
+  updateCartDisplay();
 
-document.getElementById('adminLoginForm').addEventListener('submit', e=>{
-  e.preventDefault();
-  const u = document.getElementById('adminLoginName').value.trim();
-  const p = document.getElementById('adminLoginPass').value.trim();
-  if (u !== ADMIN_USERNAME || p !== ADMIN_PASSWORD) return alert("Invalid admin credentials.");
-  currentUser='admin';
-  userLoginSection.style.display='none';
-  adminLoginSection.style.display='none';
-  userPanel.style.display='none';
-  adminPanel.style.display='block';
-  renderAdminOrders();
-  updatePurchaseCount();
-});
-
-userLogoutBtn.onclick = ()=>{ if(confirm("Logout?")){ currentUser=null; userPanel.style.display='none'; userLoginSection.style.display='block'; ratingSection.style.display='none'; purchaseForm.reset(); } };
-adminLogoutBtn.onclick = ()=>{ if(confirm("Logout admin?")){ currentUser=null; adminPanel.style.display='none'; adminLoginSection.style.display='block'; } };
-
-// --- Initial Setup ---
-userLoginSection.style.display='block';
-adminLoginSection.style.display='block';
-userPanel.style.display='none';
-adminPanel.style.display='none';
-ratingSection.style.display='none';
-updatePurchaseCount();
-updateLiveRatings();
-  document.getElementById('sideDiscountBadge').addEventListener('click', () => {
-      const form = document.getElementById('purchaseForm');
-      if (form) {
-        form.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+})();
 </script>
 
 </body>
