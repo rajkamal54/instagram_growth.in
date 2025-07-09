@@ -130,18 +130,94 @@
       display: inline-flex; align-items: center; justify-content: center;
     }
     .telegram-btn { bottom: 80px; background: #0088cc; }
+     #topDiscountBanner {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #cc2366, #e1306c, #fd1d1d);
+      color: #fff;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1em;
+      padding: 12px 0;
+      z-index: 10000;
+      animation: bannerSlide 0.5s ease-in-out;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes bannerSlide {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    /* 💥 Bouncy Side Discount Badge */
+    #sideDiscountBadge {
+      position: fixed;
+      right: -40px;
+      top: 45%;
+      background: #cc2366;
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: bold;
+      transform: rotate(90deg);
+      padding: 10px 25px;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+      animation: pulseBadge 1.8s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes pulseBadge {
+      0% {
+        transform: rotate(90deg) scale(1);
+      }
+      50% {
+        transform: rotate(90deg) scale(1.1);
+      }
+      100% {
+        transform: rotate(90deg) scale(1);
+      }
+    }
+
+    #sideDiscountBadge:hover {
+      background: #a71f57;
+    }
+
   </style>
 </head>
 <body>
 
-<header>
-  <h1>CHEAP AND BEST SELLING ON INSTAGRAM</h1>
-  <h2>LIKES · VIEWS · FOLLOWERS</h2>
-  <marquee behavior="scroll" direction="left" scrollamount="7">
-    🚀 EVERY PURCHASE CASH BACK ₹20 | 🔧 CART & MULTI‑BUY NOW LIVE! | 📱 TELEGRAM BOOST COMING SOON!
-  </marquee>
-</header>
+  <!-- 🔝 Top Sticky Promo Banner -->
+  <div id="topDiscountBanner">
+    🎉 Limited Time Offer: <strong>50% OFF</strong> on Every Item — Shop Now!
+  </div>
 
+  <!-- 💥 Side Discount Badge -->
+  <div id="sideDiscountBadge">50% OFF</div>
+
+  <!-- 🔻 Your Main Page Content -->
+  <header>
+    <h1>CHEAP AND BEST SELLING ON INSTAGRAM</h1>
+    <h2>LIKES AND VIEWS AND FOLLOWERS</h2>
+    <marquee behavior="scroll" direction="left" scrollamount="7">
+      🚀 EVERY PURCHASE CASH BACK ₹20 | 🔧 UPCOMING UPDATE: VERSION 2.0 | 📱 TELEGRAM LIKES AND FOLLOWERS BOOST COMING SOON!
+    </marquee>
+  </header>
+ <div class="container">
+    <!-- Your existing login sections, purchase forms, user/admin panels go here -->
+    
+    <!-- Example Purchase Form Target -->
+    <form id="purchaseForm">
+      <!-- Existing form inputs here -->
+      <label for="instaProfile">Instagram Profile</label>
+      <input type="text" id="instaProfile" placeholder="Must be public profile username" required />
+      <button type="submit">Submit Purchase</button>
+    </form>
 <div class="container">
   <div class="purchase-count" id="purchaseCount">Total Purchases: 0</div>
 
@@ -487,6 +563,12 @@ adminPanel.style.display='none';
 ratingSection.style.display='none';
 updatePurchaseCount();
 updateLiveRatings();
+  document.getElementById('sideDiscountBadge').addEventListener('click', () => {
+      const form = document.getElementById('purchaseForm');
+      if (form) {
+        form.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
 </script>
 
 </body>
